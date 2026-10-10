@@ -18,7 +18,7 @@ const corsOrigins = (process.env.CORS_ORIGIN || "http://localhost:5173")
   .filter(Boolean);
 const corsOptions = {
   origin(origin, callback) {
-    if (!origin || corsOrigins.includes(origin)) return callback(null, true);
+    if (!origin || corsOrigins.includes(origin) || /^http:\/\/localhost:\d+$/.test(origin)) return callback(null, true);
     return callback(new Error(`CORS blocked for origin ${origin}`));
   }
 };
